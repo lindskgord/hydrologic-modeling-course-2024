@@ -11,19 +11,32 @@
 2. Launch Docker Desktop. The application should be running while you do the next steps. (You might need to create a Docker account and sign in if you don’t already have one.)
 3. Download Docker image. Start a new terminal session (outside Docker). For example, open the Powershell on Windows or the Terminal on Mac. Copy and paste the following command into the terminal/PowerShell:
 
+- For PFLOTRAN
 ```bash
 docker pull pshuai/jupyter-pflotran-multiplatform:latest
+```
+
+- For ATS
+```bash
+docker pull pshuai/jupyter-ats-multiplatform:latest
 ```
 
 This will start downloading the docker image (~2G).
 
 4. Create a working folder (e.g., `work`) on your system. This is where you will store your course material and class exercises.
 
-5. Launch Docker. Replace `PATH/TO/WORKING_FOLDER` with the actual path to your working folder on your system, e.g., `C:\Users\USERNAME\work` (where `USERNAME` is your Windows username) or `/Users/shuai/work` (on Mac). Run the following command in your terminal/PowerShell.
+5. Launch Docker. Replace `<Local_path_to_your_work_directory>` with the actual path to your working folder on your system, e.g., `C:\Users\USERNAME\work` (where `USERNAME` is your Windows username) or `/Users/shuai/work` (on Mac). Run the following command in your terminal/PowerShell.
 
+- For PFLOTRAN
 ```bash
-# launch docker. Replace the PATH/TO/WORKING_FOLDER!
-docker run -it --rm -p 8888:8888  -v PATH/TO/WORKING_FOLDER:/home/aggie/work pshuai/jupyter-pflotran-multiplatform:latest jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token=''
+# launch docker. Replace the <Local_path_to_your_work_directory> with your actual local path!
+docker run -it --rm -p 8888:8888  -v <Local_path_to_your_work_directory>:/home/aggie/work pshuai/jupyter-pflotran-multiplatform:latest jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token=''
+```
+
+- For ATS
+```bash
+# launch docker. Replace the <Local_path_to_your_work_directory> with your actual local path!
+docker run -it --rm -p 8888:8888  -v <Local_path_to_your_work_directory>:/home/amanzi_user/work pshuai/jupyter-ats-multiplatform:latest jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token=''
 ```
 
 6. Connect to the JupyterLab. If the above command is successful, you will see output like the following at the bottom of the screen.
@@ -53,6 +66,7 @@ The course folder `hydrologic-modeling-course-2024` will appear on the left pane
 - If your Docker is running out of space, you might need to use [docker system prune](https://docs.docker.com/reference/cli/docker/system/prune/) with the appropriate options to clear out old containers and make space for the new one.
 
 ```bash
-$ docker system prune
+# remove all stopped and unused images/containers
+$ docker system prune -a
 ```
 
